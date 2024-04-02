@@ -336,6 +336,9 @@ MonoBehaviour:
   maxVelocity: 10
   acceleration: 150
   decceleration: 0
+  minVelocity: 0
+  JumpThrustPower: {x: 0, y: 0}
+  jumpTime: 0.5
 --- !u!114 &317238409
 MonoBehaviour:
   m_ObjectHideFlags: 0

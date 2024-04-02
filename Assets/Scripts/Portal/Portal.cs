@@ -30,28 +30,43 @@ public class Portal : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks if the portal is near a vertical wall
+    /// </summary>
     void CheckWalls()
     {
-        if (Physics2D.Raycast(transform.position, Vector2.up, 1f, 3) && gameObject.tag == "BluePortal")
-        {
-            PortalManager.Instance.IsBlueUpLocked = true;
-        }
+        // Directions of the raycasts
+        var up = Vector2.up;
+        var down = Vector2.down;
 
-        if (Physics2D.Raycast(transform.position, Vector2.down, 1f, 3) && gameObject.tag == "BluePortal")
-        {
-            PortalManager.Instance.IsBlueUpLocked = false;
-        }
+        // Distance of the raycasts
+        var distance = 1f;
 
-        if (Physics2D.Raycast(transform.position, Vector2.up, 1f, 3) && gameObject.tag == "OrangePortal")
-        {
-            PortalManager.Instance.IsOrangeUpLocked = true;
-        }
+        // LayerMask of the raycasts
+        var layerMask = 3;
 
-        if (Physics2D.Raycast(transform.position, Vector2.down, 1f, 3) && gameObject.tag == "OrangePortal")
-        {
-            PortalManager.Instance.IsOrangeUpLocked = false;
-        }
+        // Raycast to check if the portal is near a vertical wall
+        var isLocked = Physics2D.Raycast(transform.position, up, distance, layerMask);
+
+        // If the portal is blue, set the corresponding instance variable
+        if (gameObject.tag == "BluePortal")
+            PortalManager.Instance.IsBlueVertical = isLocked;
+        // If the portal is orange, set the corresponding instance variable
+        else
+            PortalManager.Instance.IsOrangeVertical = isLocked;
+
+        // Raycast to check if the portal is near the top of the screen
+        isLocked = Physics2D.Raycast(transform.position, down, distance, layerMask);
+
+        // If the portal is blue, set the corresponding instance variable
+        if (gameObject.tag == "BluePortal")
+            PortalManager.Instance.IsBlueUpLocked = !isLocked;
+        // If the portal is orange, set the corresponding instance variable
+        else
+            PortalManager.Instance.IsOrangeUpLocked = !isLocked;
     }
+
+
 
     void OnTriggerEnter2D(Collider2D other)
     {
