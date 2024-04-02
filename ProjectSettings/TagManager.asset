@@ -10,6 +10,7 @@ TagManager:
   - BlueProjectile
   - OrangePortal
   - BluePortal
+  - End
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - Wall
   - Water
   - UI
-  - 
+  - Solid
   - 
   - 
   - 
