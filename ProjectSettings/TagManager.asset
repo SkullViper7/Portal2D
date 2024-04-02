@@ -6,6 +6,10 @@ TagManager:
   tags:
   - HorizontalWall
   - VerticalWall
+  - OrangeProjectile
+  - BlueProjectile
+  - OrangePortal
+  - BluePortal
   layers:
   - Default
   - TransparentFX

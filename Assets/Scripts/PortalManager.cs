@@ -25,6 +25,8 @@ public class PortalManager : MonoBehaviour
         }
     }
 
-    public bool IsVertical;
-    public bool IsUpLocked;
+    public bool IsOrangeVertical;
+    public bool IsBlueVertical;
+    public bool IsOrangeUpLocked;
+    public bool IsBlueUpLocked;
 }
