@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,9 +13,25 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float decceleration;
 
+    [SerializeField]
+    private float minVelocity;
+
     private float velocity;
 
     private Rigidbody2D rb;
+
+    
+
+    [Header("Jump")]
+
+    private bool inJumpState;
+    private float startTime;
+
+    [SerializeField]
+    private Vector2 JumpThrustPower;
+
+    [SerializeField]
+    private float jumpTime = 0.5f;
 
     public void Init(PlayerMain _main)
     {
@@ -24,29 +39,63 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void FixedUpdate()
+    public void Jump()
     {
-        velocity += Direction * acceleration * Time.deltaTime;
-        velocity = ChangeVelocity(velocity);
-        rb.velocity = new Vector2(velocity, rb.velocity.y);
+        startTime = Time.time;
+        rb.AddForce(JumpThrustPower);
     }
 
-    float ChangeVelocity(float _velocity)
+    private void FixedUpdate()
     {
-        if (Mathf.Abs(_velocity) > maxVelocity)
+        if (Direction != 0)
         {
-            if (_velocity < 0)
-            {
-                return -maxVelocity;
-            }
-            else
-            {
-                return maxVelocity;
-            }
+            velocity += Direction * acceleration * Time.deltaTime;
+            velocity = ChangeVelocity(velocity);
         }
         else
         {
-            return _velocity;
+            if (velocity < 0)
+            {
+                velocity += decceleration * Time.deltaTime;
+            }
+            else
+            {
+                velocity -= decceleration * Time.deltaTime;
+            }
+
+            if (Mathf.Abs(velocity) < minVelocity)
+            {
+                velocity = 0;
+            }
+        }
+        
+        rb.velocity = new Vector2(velocity, rb.velocity.y);
+
+       /* if (inJumpState)
+        {
+            if (Time.time > startTime + jumpTime || !sm.pc.isHoldingJumpKey)
+            {
+                sm.Transition(sm.fallState);
+            }
+        }*/
+    }
+
+        private float ChangeVelocity(float _velocity)
+        {
+            if (Mathf.Abs(_velocity) > maxVelocity)
+            {
+                if (_velocity < 0)
+                {
+                    return -maxVelocity;
+                }
+                else
+                {
+                    return maxVelocity;
+                }
+            }
+            else
+            {
+                return _velocity;
+            }
         }
     }
-}
