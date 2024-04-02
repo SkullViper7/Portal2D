@@ -3,12 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - HorizontalWall
+  - VerticalWall
+  - OrangeProjectile
+  - BlueProjectile
+  - OrangePortal
+  - BluePortal
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Wall
   - Water
   - UI
   - 
