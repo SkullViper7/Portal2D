@@ -12,13 +12,13 @@ public class PlayerInputs : MonoBehaviour
 
     void OnMove(InputValue _move)
     {
-        Debug.Log("Move");
+        Debug.Log(_move.Get<Vector2>().x);
         main.Movement.Direction = _move.Get<Vector2>().x;
     }
 
     void OnJump()
     {
-        Debug.Log("jump");
+        main.Movement.Jump();
     }
 
     void OnPortalBlue()
