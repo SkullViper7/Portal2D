@@ -22,7 +22,7 @@ public class PlayerShoot : MonoBehaviour
 
     public void FireCyanProjectile()
     {
-        GameObject newGameObject = Instantiate(purpleProjectile);
+        GameObject newGameObject = Instantiate(purpleProjectile, transform);
         newGameObject.GetComponent<Rigidbody2D>().velocity = (main.Aim.FindAimDirection() * speedProjectile);
     }
 
