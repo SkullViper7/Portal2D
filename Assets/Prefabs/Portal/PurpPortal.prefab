@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 7017235966973604253}
   - component: {fileID: 904842113305620405}
   m_Layer: 0
-  m_Name: OrangePortal
-  m_TagString: CyanPortal
+  m_Name: PurpPortal
+  m_TagString: PurpPortal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
