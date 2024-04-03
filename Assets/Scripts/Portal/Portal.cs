@@ -35,35 +35,26 @@ public class Portal : MonoBehaviour
     /// </summary>
     void CheckWalls()
     {
-        // Directions of the raycasts
-        var up = Vector2.up;
-        var down = Vector2.down;
-
-        // Distance of the raycasts
-        var distance = 1f;
-
-        // LayerMask of the raycasts
-        var layerMask = 3;
-
         // Raycast to check if the portal is near a vertical wall
-        var isLocked = Physics2D.Raycast(transform.position, up, distance, layerMask);
+        var isLockedUp = Physics2D.Raycast(transform.position, Vector2.up, 1, 3);
+        var isLockedDown = Physics2D.Raycast(transform.position, Vector2.down, 1, 3);
 
-        // If the portal is blue, set the corresponding instance variable
-        if (gameObject.tag == "CyanPortal")
-            PortalManager.Instance.IsCyanVertical = isLocked;
-        // If the portal is orange, set the corresponding instance variable
-        else
-            PortalManager.Instance.IsPurpVertical = isLocked;
-
-        // Raycast to check if the portal is near the top of the screen
-        isLocked = Physics2D.Raycast(transform.position, down, distance, layerMask);
-
-        // If the portal is blue, set the corresponding instance variable
-        if (gameObject.tag == "CyanPortal")
-            PortalManager.Instance.IsCyanUpLocked = !isLocked;
-        // If the portal is orange, set the corresponding instance variable
-        else
-            PortalManager.Instance.IsPurpUpLocked = !isLocked;
+        if (gameObject.tag == "CyanPortal" && isLockedUp)
+        {
+            PortalManager.Instance.IsCyanUpLocked = true;
+        }
+        if (gameObject.tag == "PurpPortal" && isLockedUp)
+        {
+            PortalManager.Instance.IsPurpUpLocked = true;
+        }
+        if (gameObject.tag == "CyanPortal" && isLockedDown)
+        {
+            PortalManager.Instance.IsCyanUpLocked = false;
+        }
+        if (gameObject.tag == "PurpPortal" && isLockedDown)
+        {
+            PortalManager.Instance.IsPurpUpLocked = false;
+        }
     }
 
 
@@ -107,10 +98,10 @@ public class Portal : MonoBehaviour
 
     public IEnumerator DisableCollider()
     {
-        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<CapsuleCollider2D>().enabled = false;
 
         yield return new WaitForSeconds(1f);
 
-        GetComponent<BoxCollider2D>().enabled = true;
+        GetComponent<CapsuleCollider2D>().enabled = true;
     }
 }
