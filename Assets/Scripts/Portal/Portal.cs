@@ -17,15 +17,15 @@ public class Portal : MonoBehaviour
 
     public void FindOtherPortal()
     {
-        if (gameObject.tag == "BluePortal")
+        if (gameObject.tag == "CyanPortal")
         {
-            _otherPortal = GameObject.FindGameObjectWithTag("OrangePortal");
+            _otherPortal = GameObject.FindGameObjectWithTag("PurpPortal");
             _otherPortalScript = _otherPortal.GetComponent<Portal>();
         }
 
-        else if (gameObject.tag == "OrangePortal")
+        else if (gameObject.tag == "PurpPortal")
         {
-            _otherPortal = GameObject.FindGameObjectWithTag("BluePortal");
+            _otherPortal = GameObject.FindGameObjectWithTag("CyanPortal");
             _otherPortalScript = _otherPortal.GetComponent<Portal>();
         }
     }
@@ -49,7 +49,7 @@ public class Portal : MonoBehaviour
         var isLocked = Physics2D.Raycast(transform.position, up, distance, layerMask);
 
         // If the portal is blue, set the corresponding instance variable
-        if (gameObject.tag == "BluePortal")
+        if (gameObject.tag == "CyanPortal")
             PortalManager.Instance.IsBlueVertical = isLocked;
         // If the portal is orange, set the corresponding instance variable
         else
@@ -59,7 +59,7 @@ public class Portal : MonoBehaviour
         isLocked = Physics2D.Raycast(transform.position, down, distance, layerMask);
 
         // If the portal is blue, set the corresponding instance variable
-        if (gameObject.tag == "BluePortal")
+        if (gameObject.tag == "CyanPortal")
             PortalManager.Instance.IsBlueUpLocked = !isLocked;
         // If the portal is orange, set the corresponding instance variable
         else
