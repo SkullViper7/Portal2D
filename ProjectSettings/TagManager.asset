@@ -11,6 +11,7 @@ TagManager:
   - PurpProjectile
   - PurpPortal
   - CyanPortal
+  - Ennemy
   layers:
   - Default
   - TransparentFX

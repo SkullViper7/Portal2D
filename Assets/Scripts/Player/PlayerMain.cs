@@ -6,6 +6,12 @@ public class PlayerMain : MonoBehaviour
     public PlayerInputs Input;
     public PlayerMovement Movement;
     public PlayerAim Aim;
+    public PlayerShoot Shoot;
+
+    public void Die()
+    {
+        Debug.Log("Die");
+    }
 
     private void Awake()
     {

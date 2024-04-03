@@ -21,14 +21,15 @@ public class PlayerInputs : MonoBehaviour
         main.Movement.Jump();
     }
 
-    void OnPortalBlue()
+    void OnPortalCyan()
     {
-        Debug.Log("blue");
+        main.Shoot.FireCyanProjectile();
     }
 
-    public void OnPortalOrange()
+    void OnPortalPurple()
     {
-        Debug.Log("orange");
+        main.Shoot.FirePurpleProjectile();
     }
-
 }
+
+
