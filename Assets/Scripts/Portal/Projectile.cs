@@ -12,30 +12,74 @@ public class Projectile : MonoBehaviour
         {
             if (other.gameObject.tag == "VerticalWall" && gameObject.tag == "PurpProjectile")
             {
-                PortalManager.Instance.IsPurpVertical = true;
-
                 GameObject newPortal = Instantiate(_portalPrefab, transform.position, Quaternion.Euler(0, 0, 90));
+
+                PortalManager.Instance.Portals.Add(newPortal);
+
+                newPortal.GetComponent<Portal>().IsVertical = true;
+                newPortal.GetComponent<Portal>().CheckWalls();
+
+                if (PortalManager.Instance.Portals.Count > 1)
+                {
+                    for (int i = 0; i < PortalManager.Instance.Portals.Count; i++)
+                    {
+                        PortalManager.Instance.Portals[i].GetComponent<Portal>().FindOtherPortal();
+                    }
+                }
             }
 
             if (other.gameObject.tag == "HorizontalWall" && gameObject.tag == "PurpProjectile")
             {
-                PortalManager.Instance.IsPurpVertical = false;
-
                 GameObject newPortal = Instantiate(_portalPrefab, transform.position, Quaternion.identity);
+
+                PortalManager.Instance.Portals.Add(newPortal);
+
+                newPortal.GetComponent<Portal>().IsVertical = false;
+                newPortal.GetComponent<Portal>().CheckWalls();
+
+                if (PortalManager.Instance.Portals.Count > 1)
+                {
+                    for (int i = 0; i < PortalManager.Instance.Portals.Count; i++)
+                    {
+                        PortalManager.Instance.Portals[i].GetComponent<Portal>().FindOtherPortal();
+                    }
+                }
             }
 
             if (other.gameObject.tag == "VerticalWall" && gameObject.tag == "CyanProjectile")
             {
-                PortalManager.Instance.IsCyanVertical = true;
-
                 GameObject newPortal = Instantiate(_portalPrefab, transform.position, Quaternion.Euler(0, 0, 90));
+
+                PortalManager.Instance.Portals.Add(newPortal);
+
+                newPortal.GetComponent<Portal>().IsVertical = true;
+                newPortal.GetComponent<Portal>().CheckWalls();
+
+                if (PortalManager.Instance.Portals.Count > 1)
+                {
+                    for (int i = 0; i < PortalManager.Instance.Portals.Count; i++)
+                    {
+                        PortalManager.Instance.Portals[i].GetComponent<Portal>().FindOtherPortal();
+                    }
+                }
             }
 
             if (other.gameObject.tag == "HorizontalWall" && gameObject.tag == "CyanProjectile")
             {
-                PortalManager.Instance.IsCyanVertical = false;
-
                 GameObject newPortal = Instantiate(_portalPrefab, transform.position, Quaternion.identity);
+
+                PortalManager.Instance.Portals.Add(newPortal);
+
+                newPortal.GetComponent<Portal>().IsVertical = false;
+                newPortal.GetComponent<Portal>().CheckWalls();
+
+                if (PortalManager.Instance.Portals.Count > 1)
+                {
+                    for (int i = 0; i < PortalManager.Instance.Portals.Count; i++)
+                    {
+                        PortalManager.Instance.Portals[i].GetComponent<Portal>().FindOtherPortal();
+                    }
+                }
             }
 
             Destroy(gameObject);
