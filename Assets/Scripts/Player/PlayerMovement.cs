@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
         _main.Movement = this;
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
-        contactFilter.layerMask = LayerMask.GetMask("Solid");
+        contactFilter.layerMask = LayerMask.GetMask("Wall");
         contactFilter.useLayerMask = true;
         canJump = true;
     }
