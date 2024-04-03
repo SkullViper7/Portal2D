@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] GameObject _portalPrefab;
+    [SerializeField] public GameObject _portalPrefab;
 
     void OnTriggerEnter2D(Collider2D other)
     {

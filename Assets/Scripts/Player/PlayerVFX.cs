@@ -3,6 +3,18 @@ using UnityEngine.VFX;
 
 public class PlayerVFX : MonoBehaviour
 {
+    [Header("Chromatic Aberration")]
+
+    public Transform portal;
+
+    [SerializeField]
+    private float minDistanceChromaticAberration;
+
+    [SerializeField]
+    private float maxDistanceChromaticAberration;
+
+    [Header("VisualEffects")]
+
     [SerializeField]
     private VisualEffect JumpEffect;  
 
@@ -47,7 +59,7 @@ public class PlayerVFX : MonoBehaviour
             case -1:
                 WalkEffect.Play();
                 WalkEffect.transform.eulerAngles = new Vector3(0, 0, 0);
-                JumpEffect.transform.eulerAngles = new Vector3(0, 90, 0);
+                JumpEffect.transform.eulerAngles = new Vector3(0, 0, 0);
                 break;
         }
     }

@@ -22,13 +22,20 @@ public class PlayerShoot : MonoBehaviour
 
     public void FireCyanProjectile()
     {
-        GameObject newGameObject = Instantiate(purpleProjectile, transform);
-        newGameObject.GetComponent<Rigidbody2D>().velocity = (main.Aim.FindAimDirection() * speedProjectile);
+        GameObject newGameObject = Instantiate(cyanProjectile, transform);
+        PortalProjectile(newGameObject);
     }
 
     public void FirePurpleProjectile()
     {
+        GameObject newGameObject = Instantiate(purpleProjectile, transform);
+        PortalProjectile(newGameObject);
+    }
 
+    private void PortalProjectile(GameObject _newGameObject)
+    {
+        _newGameObject.GetComponent<Rigidbody2D>().velocity = main.Aim.FindAimDirection() * speedProjectile;
+        //Call an event when portal is created, our playerVFX will use this to change chromatic aberration;
     }
 }
 

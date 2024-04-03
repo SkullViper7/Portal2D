@@ -81,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
                 velocity = ChangeVelocity(velocity);
             }
         }
-        else
+        else if(isGrounded)
         {
             if (Direction != 0)
             {
