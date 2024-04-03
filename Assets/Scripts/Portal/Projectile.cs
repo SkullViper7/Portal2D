@@ -10,28 +10,28 @@ public class Projectile : MonoBehaviour
     {
         if (other.gameObject.tag == "VerticalWall" && gameObject.tag == "PurpProjectile")
         {
-            PortalManager.Instance.IsOrangeVertical = true;
+            PortalManager.Instance.IsPurpVertical = true;
 
             GameObject newPortal = Instantiate(_portalPrefab, transform.position, Quaternion.Euler(0, 0, 90));
         }
 
         if (other.gameObject.tag == "HorizontalWall" && gameObject.tag == "PurpProjectile")
         {
-            PortalManager.Instance.IsOrangeVertical = false;
+            PortalManager.Instance.IsPurpVertical = false;
 
             GameObject newPortal = Instantiate(_portalPrefab, transform.position, Quaternion.identity);
         }
 
         if (other.gameObject.tag == "VerticalWall" && gameObject.tag == "CyanProjectile")
         {
-            PortalManager.Instance.IsBlueVertical = true;
+            PortalManager.Instance.IsCyanVertical = true;
 
             GameObject newPortal = Instantiate(_portalPrefab, transform.position, Quaternion.Euler(0, 0, 90));
         }
 
         if (other.gameObject.tag == "HorizontalWall" && gameObject.tag == "CyanProjectile")
         {
-            PortalManager.Instance.IsBlueVertical = false;
+            PortalManager.Instance.IsCyanVertical = false;
 
             GameObject newPortal = Instantiate(_portalPrefab, transform.position, Quaternion.identity);
         }

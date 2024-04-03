@@ -50,20 +50,20 @@ public class Portal : MonoBehaviour
 
         // If the portal is blue, set the corresponding instance variable
         if (gameObject.tag == "CyanPortal")
-            PortalManager.Instance.IsBlueVertical = isLocked;
+            PortalManager.Instance.IsCyanVertical = isLocked;
         // If the portal is orange, set the corresponding instance variable
         else
-            PortalManager.Instance.IsOrangeVertical = isLocked;
+            PortalManager.Instance.IsPurpVertical = isLocked;
 
         // Raycast to check if the portal is near the top of the screen
         isLocked = Physics2D.Raycast(transform.position, down, distance, layerMask);
 
         // If the portal is blue, set the corresponding instance variable
         if (gameObject.tag == "CyanPortal")
-            PortalManager.Instance.IsBlueUpLocked = !isLocked;
+            PortalManager.Instance.IsCyanUpLocked = !isLocked;
         // If the portal is orange, set the corresponding instance variable
         else
-            PortalManager.Instance.IsOrangeUpLocked = !isLocked;
+            PortalManager.Instance.IsPurpUpLocked = !isLocked;
     }
 
 
@@ -80,28 +80,28 @@ public class Portal : MonoBehaviour
 
         other.transform.position = _otherPortal.transform.position;
 
-        if (PortalManager.Instance.IsBlueUpLocked && PortalManager.Instance.IsBlueVertical || 
-            PortalManager.Instance.IsOrangeUpLocked && PortalManager.Instance.IsOrangeVertical)
+        if (PortalManager.Instance.IsCyanUpLocked && PortalManager.Instance.IsCyanVertical || 
+            PortalManager.Instance.IsPurpUpLocked && PortalManager.Instance.IsPurpVertical)
         {
-            playerRb.AddForce(Vector2.left * oldVelocity, ForceMode2D.Impulse);
+            playerRb.AddForce(Vector2.left * oldVelocity * 10, ForceMode2D.Impulse);
         }
         
-        if (PortalManager.Instance.IsBlueUpLocked && !PortalManager.Instance.IsBlueVertical
-            || PortalManager.Instance.IsOrangeUpLocked && !PortalManager.Instance.IsOrangeVertical)
+        if (PortalManager.Instance.IsCyanUpLocked && !PortalManager.Instance.IsCyanVertical
+            || PortalManager.Instance.IsPurpUpLocked && !PortalManager.Instance.IsPurpVertical)
         {
-            playerRb.AddForce(Vector2.down * oldVelocity, ForceMode2D.Impulse);
+            playerRb.AddForce(Vector2.down * oldVelocity * 10, ForceMode2D.Impulse);
         }
 
-        if (!PortalManager.Instance.IsBlueUpLocked && PortalManager.Instance.IsBlueVertical
-            || !PortalManager.Instance.IsOrangeUpLocked && PortalManager.Instance.IsOrangeVertical)
+        if (!PortalManager.Instance.IsCyanUpLocked && PortalManager.Instance.IsCyanVertical
+            || !PortalManager.Instance.IsPurpUpLocked && PortalManager.Instance.IsPurpVertical)
         {
-            playerRb.AddForce(Vector2.right * oldVelocity, ForceMode2D.Impulse);
+            playerRb.AddForce(oldVelocity.normalized * oldVelocity.magnitude * Vector2.right, ForceMode2D.Impulse);
         }
 
-        if (!PortalManager.Instance.IsBlueUpLocked && !PortalManager.Instance.IsBlueVertical
-            || !PortalManager.Instance.IsOrangeUpLocked && !PortalManager.Instance.IsOrangeVertical)
+        if (!PortalManager.Instance.IsCyanUpLocked && !PortalManager.Instance.IsCyanVertical
+            || !PortalManager.Instance.IsPurpUpLocked && !PortalManager.Instance.IsPurpVertical)
         {
-            playerRb.AddForce(Vector2.up * oldVelocity, ForceMode2D.Impulse);
+            playerRb.AddForce(Vector2.up * oldVelocity * 10, ForceMode2D.Impulse);
         }
     }
 
