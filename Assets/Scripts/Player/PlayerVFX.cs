@@ -1,17 +1,25 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.VFX;
 
 public class PlayerVFX : MonoBehaviour
 {
     [Header("Chromatic Aberration")]
 
-    public Transform portal;
+    public Transform Portal;
+
+    [SerializeField]
+    private Volume volume;
 
     [SerializeField]
     private float minDistanceChromaticAberration;
 
     [SerializeField]
     private float maxDistanceChromaticAberration;
+
+    private ChromaticAberration ca;
 
     [Header("VisualEffects")]
 
@@ -32,6 +40,10 @@ public class PlayerVFX : MonoBehaviour
         main = _main;
         main.Movement.OnJump += PlayJumpEffect;
         main.Movement.OnLanding += PlayLandingEffect;
+        if (volume.profile.TryGet<ChromaticAberration>(out var type))
+        {
+            ca = type;
+        }
     }
 
     private void PlayJumpEffect()
@@ -61,6 +73,20 @@ public class PlayerVFX : MonoBehaviour
                 WalkEffect.transform.eulerAngles = new Vector3(0, 0, 0);
                 JumpEffect.transform.eulerAngles = new Vector3(0, 0, 0);
                 break;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (Portal != null)
+        {
+            Vector3 _direction = Portal.position - transform.position;
+            Debug.Log(_direction.x + _direction.y);
+            if (_direction.x + _direction.y < maxDistanceChromaticAberration)
+            {
+                ca.intensity.value =  (maxDistanceChromaticAberration - (_direction.x + _direction.y)) / maxDistanceChromaticAberration;
+
+            }
         }
     }
 }
