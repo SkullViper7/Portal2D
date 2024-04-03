@@ -1,16 +1,41 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private GameObject purpleProjectile;
+
+    [SerializeField]
+    private GameObject cyanProjectile;
+
+    [SerializeField]
+    private float speedProjectile;
+
+    private PlayerMain main;
+
+    public void Init(PlayerMain _main)
     {
-        
+        _main.Shoot = this;
+        main = _main;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void FireCyanProjectile()
     {
-        
+        GameObject newGameObject = Instantiate(cyanProjectile, transform);
+        PortalProjectile(newGameObject);
+    }
+
+    public void FirePurpleProjectile()
+    {
+        GameObject newGameObject = Instantiate(purpleProjectile, transform);
+        PortalProjectile(newGameObject);
+    }
+
+    private void PortalProjectile(GameObject _newGameObject)
+    {
+        _newGameObject.GetComponent<Rigidbody2D>().velocity = main.Aim.FindAimDirection() * speedProjectile;
+        //Call an event when portal is created, our playerVFX will use this to change chromatic aberration;
     }
 }
+

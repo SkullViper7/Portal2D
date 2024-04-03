@@ -25,7 +25,7 @@ public class EnnemyPatrol : MonoBehaviour
         //if(transform.position)
         Vector3 _direction = nextPoint.position - transform.position;
 
-        if (Mathf.Abs(_direction.x) + Mathf.Abs(_direction.y) < 1)
+        if (Mathf.Abs(_direction.x) < 1)
         {
             if (actualPoint < PatrolPoints.Count - 1)
             {

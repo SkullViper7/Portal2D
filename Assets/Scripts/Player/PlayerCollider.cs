@@ -8,5 +8,23 @@ public class PlayerCollider : MonoBehaviour
         {
             Debug.Log("End");
         }
+
+        if (collision.tag == "Spike")
+        {
+            SendMessage("Die");
+        }
+
+        if (collision.tag == "DeadZone")
+        {
+            SendMessage("Die");
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.tag == "Ennemy")
+        {
+            SendMessage("Die");
+        }
     }
 }
