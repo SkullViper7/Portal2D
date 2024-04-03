@@ -12,7 +12,7 @@ public class Portal : MonoBehaviour
     {
         CheckWalls();
 
-        Invoke("FindOtherPortal", 1f);
+        Invoke("FindOtherPortal", 0.1f);
     }
 
     public void FindOtherPortal()
