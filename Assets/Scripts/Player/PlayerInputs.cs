@@ -12,8 +12,8 @@ public class PlayerInputs : MonoBehaviour
 
     void OnMove(InputValue _move)
     {
-        Debug.Log(_move.Get<Vector2>().x);
         main.Movement.Direction = _move.Get<Vector2>().x;
+        main.VFX.UpdateWalkEffect(_move.Get<Vector2>().x);
     }
 
     void OnJump()
@@ -31,5 +31,4 @@ public class PlayerInputs : MonoBehaviour
         main.Shoot.FirePurpleProjectile();
     }
 }
-
 

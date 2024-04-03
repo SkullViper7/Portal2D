@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -31,6 +32,9 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     private bool canJump;
 
+    public event Action OnJump;
+    public event Action OnLanding;
+
     [SerializeField]
     private Vector2 JumpThrustPower;
 
@@ -45,16 +49,15 @@ public class PlayerMovement : MonoBehaviour
         contactFilter.layerMask = LayerMask.GetMask("Wall");
         contactFilter.useLayerMask = true;
         canJump = true;
+        OnJump += InitJump;
+        OnLanding += PlayerIsLanding;
     }
 
     public void Jump()
     {
         if (canJump)
         {
-            startTime = Time.time;
-            rb.AddForce(JumpThrustPower);
-            inJumpState = true;
-            canJump = false;
+            OnJump();
         }
     }
 
@@ -69,13 +72,12 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (isGrounded)
                 {
-                    inJumpState = false;
-                    canJump = true;
+                    OnLanding();
                 }
             }
-            else if (Direction != 0)
+            if (Direction != 0)
             {
-                velocity += Direction * acceleration * Time.deltaTime;
+                velocity += Direction * (acceleration / 3) * Time.deltaTime;
                 velocity = ChangeVelocity(velocity);
             }
         }
@@ -107,33 +109,33 @@ public class PlayerMovement : MonoBehaviour
 
         rb.velocity = new Vector2(velocity, rb.velocity.y);
 
-       /* if (inJumpState)
-        {
-            if (Time.time > startTime + jumpTime || !sm.pc.isHoldingJumpKey)
-            {
-                sm.Transition(sm.fallState);
-            }
-        }*/
+        /* if (inJumpState)
+         {
+             if (Time.time > startTime + jumpTime || !sm.pc.isHoldingJumpKey)
+             {
+                 sm.Transition(sm.fallState);
+             }
+         }*/
     }
 
-        private float ChangeVelocity(float _velocity)
+    private float ChangeVelocity(float _velocity)
+    {
+        if (Mathf.Abs(_velocity) > maxVelocity)
         {
-            if (Mathf.Abs(_velocity) > maxVelocity)
+            if (_velocity < 0)
             {
-                if (_velocity < 0)
-                {
-                    return -maxVelocity;
-                }
-                else
-                {
-                    return maxVelocity;
-                }
+                return -maxVelocity;
             }
             else
             {
-                return _velocity;
+                return maxVelocity;
             }
         }
+        else
+        {
+            return _velocity;
+        }
+    }
 
     private bool CheckForGround()
     {
@@ -145,5 +147,19 @@ public class PlayerMovement : MonoBehaviour
         //return  hit ;
         return i > 0;//rb.velocity.y == 0;
 
+    }
+
+    private void InitJump()
+    {
+        startTime = Time.time;
+        rb.AddForce(JumpThrustPower);
+        inJumpState = true;
+        canJump = false;
+    }
+
+    private void PlayerIsLanding()
+    {
+        inJumpState = false;
+        canJump = true;
     }
 }
