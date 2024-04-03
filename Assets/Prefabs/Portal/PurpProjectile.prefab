@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 6440802298101908181}
   - component: {fileID: -3132408663493108079}
   m_Layer: 0
-  m_Name: OrangeProjectile
-  m_TagString: OrangeProjectile
+  m_Name: PurpProjectile
+  m_TagString: PurpProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.6, b: 0, a: 1}
+  m_Color: {r: 0.48607445, g: 0, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
