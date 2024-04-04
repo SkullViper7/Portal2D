@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
     public event Action OnJump;
     public event Action OnLanding;
+    public event Action OnFall;
 
     [SerializeField]
     private Vector2 JumpThrustPower;
@@ -110,6 +111,11 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
+            else if (!inJumpState)
+            {
+                OnFall();
+            }
+
             rb.velocity = new Vector2(velocity, rb.velocity.y);
         }
 
@@ -120,9 +126,6 @@ public class PlayerMovement : MonoBehaviour
                 IsPortalInForce = false;
             }
         }
-
-
-        
 
         /* if (inJumpState)
          {

@@ -9,6 +9,7 @@ public class PlayerMain : MonoBehaviour
     public PlayerShoot Shoot;
     public PlayerVFX VFX;
     public PlayerCamera Camera;
+    public PlayerAnim Anim;
 
     public void Die()
     {
