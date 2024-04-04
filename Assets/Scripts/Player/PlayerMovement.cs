@@ -5,6 +5,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public float Direction;
 
+    public bool IsPortalInForce;
+
     [SerializeField]
     private float maxVelocity;
 
@@ -55,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Jump()
     {
-        if (canJump)
+        if (canJump && !IsPortalInForce)
         {
             OnJump();
         }
@@ -65,49 +67,62 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = CheckForGround();
 
-
-        if (inJumpState)
+        if (!IsPortalInForce)
         {
-            if (Time.time > startTime + jumpTime)
+            if (inJumpState)
             {
-                if (isGrounded)
+                if (Time.time > startTime + jumpTime)
                 {
-                    OnLanding();
+                    if (isGrounded)
+                    {
+                        OnLanding();
+                    }
+                }
+
+                if (Direction != 0)
+                {
+                    velocity += Direction * (acceleration / 3) * Time.deltaTime;
+                    velocity = ChangeVelocity(velocity);
                 }
             }
-            if (Direction != 0)
+            else if(isGrounded && !IsPortalInForce)
             {
-                velocity += Direction * (acceleration / 3) * Time.deltaTime;
-                velocity = ChangeVelocity(velocity);
-            }
-        }
-        else if(isGrounded)
-        {
-            if (Direction != 0)
-            {
-                velocity += Direction * acceleration * Time.deltaTime;
-                velocity = ChangeVelocity(velocity);
-            }
-            else
-            {
-                if (velocity < 0)
+                if (Direction != 0)
                 {
-                    velocity += decceleration * Time.deltaTime;
+                    velocity += Direction * acceleration * Time.deltaTime;
+                    velocity = ChangeVelocity(velocity);
                 }
                 else
                 {
-                    velocity -= decceleration * Time.deltaTime;
-                }
+                    if (velocity < 0)
+                    {
+                        velocity += decceleration * Time.deltaTime;
+                    }
+                    else
+                    {
+                        velocity -= decceleration * Time.deltaTime;
+                    }
 
-                if (Mathf.Abs(velocity) < minVelocity)
-                {
-                    velocity = 0;
+                    if (Mathf.Abs(velocity) < minVelocity)
+                    {
+                        velocity = 0;
+                    }
                 }
+            }
+
+            rb.velocity = new Vector2(velocity, rb.velocity.y);
+        }
+
+        else
+        {
+            if (rb.velocity.magnitude <= maxVelocity)
+            {
+                IsPortalInForce = false;
             }
         }
 
 
-        rb.velocity = new Vector2(velocity, rb.velocity.y);
+        
 
         /* if (inJumpState)
          {

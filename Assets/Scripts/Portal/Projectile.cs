@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -10,7 +8,7 @@ public class Projectile : MonoBehaviour
     {
         if (other.gameObject.tag == "VerticalWall" || other.gameObject.tag == "HorizontalWall")
         {
-            if (other.gameObject.tag == "VerticalWall" && gameObject.tag == "PurpProjectile")
+           /* if (other.gameObject.tag == "VerticalWall" )
             {
                 GameObject newPortal = Instantiate(_portalPrefab, transform.position, Quaternion.Euler(0, 0, 90));
 
@@ -28,7 +26,7 @@ public class Projectile : MonoBehaviour
                 }
             }
 
-            if (other.gameObject.tag == "HorizontalWall" && gameObject.tag == "PurpProjectile")
+            if (other.gameObject.tag == "HorizontalWall")
             {
                 GameObject newPortal = Instantiate(_portalPrefab, transform.position, Quaternion.identity);
 
@@ -80,9 +78,35 @@ public class Projectile : MonoBehaviour
                         PortalManager.Instance.Portals[i].GetComponent<Portal>().FindOtherPortal();
                     }
                 }
+            }*/
+
+            if (other.gameObject.tag == "VerticalWall" )
+            {
+                GameObject newPortal = Instantiate(_portalPrefab, transform.position, Quaternion.Euler(0, 0, 90));
+                newPortal.GetComponent<Portal>().IsVertical = true;
+                InitPortal(newPortal);
+            }
+
+            if (other.gameObject.tag == "HorizontalWall")
+            {
+                GameObject newPortal = Instantiate(_portalPrefab, transform.position, Quaternion.identity);
+                newPortal.GetComponent<Portal>().IsVertical = false;
+                InitPortal(newPortal);
             }
 
             Destroy(gameObject);
         }
+    }
+
+    private void InitPortal(GameObject _newPortal)
+    {
+        PortalManager.Instance.Portals.Add(_newPortal);
+        Portal portal = _newPortal.GetComponent<Portal>();
+        portal.CheckWalls();
+
+            if (PortalManager.Instance.Portals.Count > 1)
+            {
+                portal.FindOtherPortal();
+            }
     }
 }

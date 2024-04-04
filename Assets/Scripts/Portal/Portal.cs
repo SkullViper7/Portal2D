@@ -1,16 +1,16 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Portal : MonoBehaviour
 {
-    GameObject _otherPortal;
+    public GameObject _otherPortal;
     Portal _otherPortalScript;
 
     public bool IsUpLocked;
     public bool IsVertical;
+
+    public Vector2 ForceDirection;
 
     // void Start()
     // {
@@ -21,17 +21,52 @@ public class Portal : MonoBehaviour
 
     public void FindOtherPortal()
     {
-        if (gameObject.tag == "CyanPortal")
+        bool canFindPortal = true;
+        if (PortalManager.Instance.Portals.Count == 2)
         {
-            _otherPortal = GameObject.FindGameObjectWithTag("PurpPortal");
-            _otherPortalScript = _otherPortal.GetComponent<Portal>();
+            for(int i = 0; i < PortalManager.Instance.Portals.Count; i++)
+            {
+                GameObject portalToDestroy = PortalManager.Instance.Portals[i];
+                if (gameObject != portalToDestroy && gameObject.tag == portalToDestroy.tag)
+                {
+                    PortalManager.Instance.Portals.Remove(portalToDestroy);
+                    Destroy(portalToDestroy);
+                    canFindPortal = false;
+                }
+            }
+            
         }
 
-        else if (gameObject.tag == "PurpPortal")
+        if (canFindPortal)
         {
-            _otherPortal = GameObject.FindGameObjectWithTag("CyanPortal");
-            _otherPortalScript = _otherPortal.GetComponent<Portal>();
+            if (gameObject.tag == "CyanPortal")
+            {
+                FindPortal("PurpPortal");
+            }
+            else if (gameObject.tag == "PurpPortal")
+            {
+                FindPortal("CyanPortal");
+            }
         }
+        
+    }
+
+    private void FindPortal(string _tag)
+    {
+        _otherPortal = GameObject.FindGameObjectWithTag(_tag);
+        _otherPortalScript = _otherPortal.GetComponent<Portal>();
+
+        if (_otherPortalScript._otherPortal != null)
+        {
+            _otherPortalScript.NewPortal(this);
+        }
+
+        StartCoroutine(_otherPortalScript.GetNewPortal(this));
+    }
+
+    public void NewPortal(Portal _newPortal)
+    {
+        _otherPortalScript.GetDisable();
     }
 
     /// <summary>
@@ -43,11 +78,34 @@ public class Portal : MonoBehaviour
 
         LayerMask mask = LayerMask.GetMask("Wall");
         Vector2 raycastDirection = Vector2.up;
+        int forcePoint = 0;
         if (IsVertical)
         {
+            forcePoint = 1;
             raycastDirection = Vector2.right;
         }
+
         IsUpLocked = Physics2D.Raycast(transform.position, raycastDirection, 1, mask);
+        if (IsUpLocked)
+        {
+            forcePoint += 2;
+        }
+
+        switch (forcePoint)
+        {
+            case 0:
+                ForceDirection = Vector2.up;
+                break;
+            case 1:
+                ForceDirection = Vector2.right;
+                break;
+            case 2:
+                ForceDirection = Vector2.down;
+                break;
+            case 3:
+                ForceDirection = Vector2.left;
+                break;
+        }
         //Destroy(hit.transform.gameObject);
     }
 
@@ -58,9 +116,9 @@ public class Portal : MonoBehaviour
         StartCoroutine(_otherPortalScript.DisableCollider());
 
         other.transform.position = _otherPortal.transform.position;
-
-        Vector3 otherNormal = _otherPortal.transform.InverseTransformDirection(_otherPortal.transform.up - _otherPortalScript.transform.position);
-        playerRb.velocity = Vector2.Reflect(playerRb.velocity, otherNormal);
+        float velocityTotal = playerRb.velocity.magnitude;
+        playerRb.GetComponent<PlayerMovement>().IsPortalInForce = true;
+        playerRb.velocity = _otherPortalScript.ForceDirection * Math.Abs(velocityTotal);
     }
 
 
@@ -68,8 +126,21 @@ public class Portal : MonoBehaviour
     {
         GetComponent<CapsuleCollider2D>().enabled = false;
 
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(1f);
 
         GetComponent<CapsuleCollider2D>().enabled = true;
+    }
+
+    public void GetDisable()
+    {
+        PortalManager.Instance.Portals.Remove(gameObject);
+        Destroy(gameObject);
+    }
+
+    public IEnumerator GetNewPortal(Portal _theNewPortal)
+    {
+        yield return new WaitForSeconds(0.1f);
+        _otherPortal = _theNewPortal.gameObject;
+        _otherPortalScript = _theNewPortal;
     }
 }
