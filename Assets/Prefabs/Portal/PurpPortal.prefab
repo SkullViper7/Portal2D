@@ -99,6 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53229684b95447e428aecd81b2600d9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsUpLocked: 0
+  IsVertical: 0
 --- !u!70 &102970276197311626
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
