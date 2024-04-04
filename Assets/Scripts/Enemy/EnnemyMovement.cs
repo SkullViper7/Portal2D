@@ -4,6 +4,8 @@ public class EnnemyMovement : MonoBehaviour
 {
     public Vector3 Direction;
 
+    public bool IsPortalInForce;
+
     [SerializeField]
     private float speed;
 
@@ -22,7 +24,7 @@ public class EnnemyMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         transform.Translate(Direction * speed * Time.deltaTime, Space.World);
     }

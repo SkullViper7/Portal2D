@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 2699495174931837100}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -482,6 +482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Direction: 0
+  IsPortalInForce: 0
   maxVelocity: 10
   acceleration: 60
   decceleration: 75
@@ -599,6 +600,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05cad11977fc28f459b709b5f5f90c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Portal: {fileID: 0}
+  volume: {fileID: 0}
+  minDistanceChromaticAberration: 0
+  maxDistanceChromaticAberration: 0
   JumpEffect: {fileID: 2258880982116438805}
   LandingEffect: {fileID: 954825524210759511}
   WalkEffect: {fileID: 2105678447628980692}

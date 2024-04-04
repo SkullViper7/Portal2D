@@ -111,14 +111,27 @@ public class Portal : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Rigidbody2D playerRb = other.GetComponent<Rigidbody2D>();
+        if (PortalManager.Instance.Portals.Count == 2)
+            {
+            Rigidbody2D playerRb = other.GetComponent<Rigidbody2D>();
 
-        StartCoroutine(_otherPortalScript.DisableCollider());
+            StartCoroutine(_otherPortalScript.DisableCollider());
 
-        other.transform.position = _otherPortal.transform.position;
-        float velocityTotal = playerRb.velocity.magnitude;
-        playerRb.GetComponent<PlayerMovement>().IsPortalInForce = true;
-        playerRb.velocity = _otherPortalScript.ForceDirection * Math.Abs(velocityTotal);
+            other.transform.position = _otherPortal.transform.position;
+            float velocityTotal = playerRb.velocity.magnitude;
+            if (other.tag == "Ennemy")
+            {
+                other.GetComponent<EnnemyMovement>().IsPortalInForce = true;
+                other.GetComponent<Rigidbody2D>().velocity = _otherPortalScript.ForceDirection * Math.Abs(velocityTotal);
+            }
+
+            if (other.tag == "Player")
+            {
+                playerRb.GetComponent<PlayerMovement>().IsPortalInForce = true;
+                playerRb.velocity = _otherPortalScript.ForceDirection * Math.Abs(velocityTotal);
+            }
+        }
+        
     }
 
 

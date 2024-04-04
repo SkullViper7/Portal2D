@@ -27,7 +27,7 @@ visuel
 			spawn
 			scale portal
 		portal gun
-			tir
+			tir -> trail + projectile
 			impact mur
 			idle
 			entrée / sortie
