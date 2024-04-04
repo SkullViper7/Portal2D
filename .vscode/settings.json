@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Portal2D.sln"
+    "dotnet.defaultSolution": "Portal2D.sln",
+    "codeium.enableSearch": true
 }
