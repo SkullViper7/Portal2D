@@ -91,4 +91,8 @@ public class ImpulseManager : MonoBehaviour
         _impulseSource.GenerateImpulse();
     }
 
+    public void Impulse()
+    {
+        _impulseSource.GenerateImpulse();
+    }
 }
