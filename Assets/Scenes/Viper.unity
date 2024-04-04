@@ -641,6 +641,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1698935218434798620, guid: 25786bebe89bb42408a1ed1a4c131a3c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2124457624}
+    - targetCorrespondingSourceObject: {fileID: 1698935218434798620, guid: 25786bebe89bb42408a1ed1a4c131a3c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2124457636}
     - targetCorrespondingSourceObject: {fileID: 1338454679666303415, guid: 25786bebe89bb42408a1ed1a4c131a3c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1544219123}
@@ -1631,8 +1634,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1940117564}
   - component: {fileID: 1940117563}
+  - component: {fileID: 1940117565}
   m_Layer: 0
-  m_Name: Impulse
+  m_Name: ImpulseManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1706,6 +1710,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1940117565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940117562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e771416ff68a2047b5a2ef6204fdabd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1987152180
 GameObject:
   m_ObjectHideFlags: 0
@@ -1931,6 +1947,18 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4084981764570596245, guid: 25786bebe89bb42408a1ed1a4c131a3c, type: 3}
   m_PrefabInstance: {fileID: 822423963}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2124457636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124457612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23161f4093324b04c9076b57c7ca21dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

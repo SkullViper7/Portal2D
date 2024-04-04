@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ public class PlayerShoot : MonoBehaviour
     private float speedProjectile;
 
     private PlayerMain main;
+
+    public event Action OnShoot;
 
     public void Init(PlayerMain _main)
     {
@@ -33,9 +36,10 @@ public class PlayerShoot : MonoBehaviour
     }
 
     private void PortalProjectile(GameObject _newGameObject)
-    {
+    {   
         _newGameObject.GetComponent<Rigidbody2D>().velocity = main.Aim.FindAimDirection() * speedProjectile;
         //Call an event when portal is created, our playerVFX will use this to change chromatic aberration;
+        OnShoot();
     }
 }
 
