@@ -43,11 +43,12 @@ visuel
 			mort ennemi / player
 			passage portal
 			impact portal mur
-			atterissage
+			atterissage §
+			tir §
 		zoom
 			changement taille map
 			passage portal bounce / fondu transition
-		smoothdamp
+		smoothdamp §
 	
 	lights
 		illumination tile 
