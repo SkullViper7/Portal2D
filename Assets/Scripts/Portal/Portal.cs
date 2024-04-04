@@ -1,10 +1,13 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
     public GameObject _otherPortal;
+
+    public GameObject Player;
     Portal _otherPortalScript;
 
     public bool IsUpLocked;
@@ -19,18 +22,22 @@ public class Portal : MonoBehaviour
     //     Invoke("FindOtherPortal", 0.1f);
     // }
 
+    private void Start()
+    {
+        Player.GetComponent<PlayerVFX>().portals.Add(transform);
+    }
+
     public void FindOtherPortal()
     {
         bool canFindPortal = true;
         if (PortalManager.Instance.Portals.Count == 2)
         {
-            for(int i = 0; i < PortalManager.Instance.Portals.Count; i++)
+            for (int i = 0; i < PortalManager.Instance.Portals.Count; i++)
             {
                 GameObject portalToDestroy = PortalManager.Instance.Portals[i];
                 if (gameObject != portalToDestroy && gameObject.tag == portalToDestroy.tag)
                 {
-                    PortalManager.Instance.Portals.Remove(portalToDestroy);
-                    Destroy(portalToDestroy);
+                    portalToDestroy.GetComponent<Portal>().GetDisable();
                     canFindPortal = false;
                 }
             }
@@ -147,6 +154,7 @@ public class Portal : MonoBehaviour
     public void GetDisable()
     {
         PortalManager.Instance.Portals.Remove(gameObject);
+        Player.GetComponent<PlayerVFX>().portals.Remove(transform);
         Destroy(gameObject);
     }
 
