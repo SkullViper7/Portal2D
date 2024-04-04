@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
+using DG.Tweening;
 
 public class Portal : MonoBehaviour
 {
@@ -15,6 +15,9 @@ public class Portal : MonoBehaviour
 
     public Vector2 ForceDirection;
 
+    private Vector3 originalScale;
+    private Vector3 scaleTo;
+
     // void Start()
     // {
     //     CheckWalls();
@@ -25,6 +28,7 @@ public class Portal : MonoBehaviour
     private void Start()
     {
         Player.GetComponent<PlayerVFX>().portals.Add(transform);
+        originalScale = transform.localScale;
     }
 
     public void FindOtherPortal()
@@ -130,12 +134,25 @@ public class Portal : MonoBehaviour
             {
                 other.GetComponent<EnnemyMovement>().IsPortalInForce = true;
                 other.GetComponent<Rigidbody2D>().velocity = _otherPortalScript.ForceDirection * Math.Abs(velocityTotal);
+                
+                scaleTo = originalScale * 2;
+                transform.DOScale(scaleTo, 1)
+                    .SetEase(Ease.Linear)
+                    .SetLoops(-1, LoopType.Yoyo);
+            
             }
 
             if (other.tag == "Player")
             {
                 playerRb.GetComponent<PlayerMovement>().IsPortalInForce = true;
                 playerRb.velocity = _otherPortalScript.ForceDirection * Math.Abs(velocityTotal);
+                scaleTo = originalScale /0.8f;
+                transform.DOScale(scaleTo, 0.5f)
+                    .SetEase(Ease.OutBack)
+                    .SetDelay(0.05f)
+                    .OnComplete(() =>
+                    transform.DOScale(originalScale, 1));
+
             }
         }
         
