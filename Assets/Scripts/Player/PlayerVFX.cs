@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -8,7 +8,7 @@ public class PlayerVFX : MonoBehaviour
 {
     [Header("Chromatic Aberration")]
 
-    public Transform Portal;
+    public List<Transform> portals = new List<Transform>();
 
     [SerializeField]
     private Volume volume;
@@ -20,6 +20,7 @@ public class PlayerVFX : MonoBehaviour
     private float maxDistanceChromaticAberration;
 
     private ChromaticAberration ca;
+    private Vignette vignette;
 
     [Header("VisualEffects")]
 
@@ -40,10 +41,15 @@ public class PlayerVFX : MonoBehaviour
         main = _main;
         main.Movement.OnJump += PlayJumpEffect;
         main.Movement.OnLanding += PlayLandingEffect;
-        /*if (volume.profile.TryGet<ChromaticAberration>(out var type))
+        if (volume.profile.TryGet<ChromaticAberration>(out var caType))
         {
-            ca = type;
-        }*/
+            ca = caType;
+        }
+
+        if (volume.profile.TryGet<Vignette>(out var vignetteType))
+        {
+            vignette = vignetteType;
+        }
     }
 
     private void PlayJumpEffect()
@@ -78,14 +84,22 @@ public class PlayerVFX : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Portal != null)
+        if (portals.Count != 0)
         {
-            Vector3 _direction = Portal.position - transform.position;
-            Debug.Log(_direction.x + _direction.y);
-            if (_direction.x + _direction.y < maxDistanceChromaticAberration)
+            Vector3 closestDirection = portals[0].position - transform.position;
+            foreach(var portal in portals)
             {
-                ca.intensity.value =  (maxDistanceChromaticAberration - (_direction.x + _direction.y)) / maxDistanceChromaticAberration;
-
+                Vector3 _direction = portal.position - transform.position; 
+                if (closestDirection.magnitude > _direction.magnitude)
+                {
+                    closestDirection = _direction;
+                }
+            }
+            
+            if (closestDirection.magnitude < maxDistanceChromaticAberration)
+            {
+                ca.intensity.value =  (maxDistanceChromaticAberration - closestDirection.magnitude) / maxDistanceChromaticAberration;
+                vignette.intensity.value = (maxDistanceChromaticAberration - closestDirection.magnitude) / maxDistanceChromaticAberration;
             }
         }
     }

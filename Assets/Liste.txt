@@ -24,7 +24,7 @@ visuel
 			poussiere pas / atterissage / saut §
 			mort (variantes)
 			fin de niveau
-			spawn
+			spawn §
 			scale portal
 		portal gun
 			tir -> trail + projectile
