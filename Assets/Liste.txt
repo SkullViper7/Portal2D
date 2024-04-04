@@ -51,7 +51,7 @@ visuel
 		smoothdamp §
 	
 	lights
-		illumination tile 
+		illumination tile §
 		tir
 		portal lumière statique
 		flashlight
@@ -62,9 +62,9 @@ visuel
 		rescale passage
 	
 	physique
-		recul tir
-		movement smooth 
-		accelération sortie portal
+		recul tir §
+		movement smooth § 
+		accelération sortie portal §
 		projection mort
 
 rumble
