@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5518023683938196861}
   m_Layer: 0
   m_Name: CyanPortal
-  m_TagString: CyanProjectile
+  m_TagString: CyanPortal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

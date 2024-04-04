@@ -40,10 +40,10 @@ public class PlayerVFX : MonoBehaviour
         main = _main;
         main.Movement.OnJump += PlayJumpEffect;
         main.Movement.OnLanding += PlayLandingEffect;
-        if (volume.profile.TryGet<ChromaticAberration>(out var type))
+        /*if (volume.profile.TryGet<ChromaticAberration>(out var type))
         {
             ca = type;
-        }
+        }*/
     }
 
     private void PlayJumpEffect()

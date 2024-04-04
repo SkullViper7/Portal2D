@@ -121,6 +121,17 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
+                    "id": "59a3f215-691e-4a7d-b9ba-252d51e40230",
+                    "path": "<Keyboard>/h",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "mouse",
+                    "action": "PortalPurple",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "2D Vector",
                     "id": "349f9d50-a44b-4d1d-b8fe-12310bdc92e7",
                     "path": "2DVector",
