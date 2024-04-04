@@ -46,7 +46,7 @@ public class ImpulseManager : MonoBehaviour
     /// <param name="type">The type of impulse to use.</param>
     /// <param name="shape">The shape of the impulse.</param>
     /// <param name="duration">The duration of the impulse.</param>
-    public void Shake(int type, int shape, float duration)
+    public void Shake(int type, int shape, Vector3 velocity, float duration)
     {
         // Set the impulse type based on the 'type' parameter using a switch statement
         switch (type)
@@ -87,6 +87,7 @@ public class ImpulseManager : MonoBehaviour
 
         // Set the default velocity, impulse duration, and generate the impulse
         _impulseSource.m_ImpulseDefinition.m_ImpulseDuration = duration;
+        _impulseSource.m_DefaultVelocity = velocity;
         _impulseSource.GenerateImpulse();
     }
 
