@@ -40,7 +40,15 @@ public class Portal : MonoBehaviour
     public void CheckWalls()
     {
         // Raycast to check if the portal is near a vertical wall
-        IsUpLocked = Physics2D.Raycast(transform.position, Vector2.up, 1, 3);
+
+        LayerMask mask = LayerMask.GetMask("Wall");
+        Vector2 raycastDirection = Vector2.up;
+        if (IsVertical)
+        {
+            raycastDirection = Vector2.right;
+        }
+        IsUpLocked = Physics2D.Raycast(transform.position, raycastDirection, 1, mask);
+        //Destroy(hit.transform.gameObject);
     }
 
     void OnTriggerEnter2D(Collider2D other)

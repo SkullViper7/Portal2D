@@ -161,4 +161,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd9515efa99b8b64aba954277df687fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _portalPrefab: {fileID: 5473231385858987443, guid: 2308279ba9bb92142af93835ea5d4b2d, type: 3}
+  _portalPrefab: {fileID: 5473231385858987443, guid: a481b2d81a77ba940a6f56e67638b140, type: 3}
