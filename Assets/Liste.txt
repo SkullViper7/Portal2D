@@ -1,0 +1,74 @@
+audio
+	musique §
+	SFX
+		bruit portal
+			tir §
+			collision mur §
+			entrée / sortie §
+			fermeture portal §
+		ennemi
+			bruit de pas §
+			mort (variantes) §
+		player
+			spawn §
+			mort §
+			bruits pas (suivant vitesse) §
+			bruit saut §
+			fin de niveau §
+		ambiance §
+
+visuel
+	VFX
+		player
+			trail
+			poussiere pas / atterissage / saut
+			mort (variantes)
+			fin de niveau
+			spawn
+			scale portal
+		portal gun
+			tir
+			impact mur
+			idle
+			entrée / sortie
+			fermeture
+		ennemi
+			(trail)
+			mort (variantes)
+			poussiere pas
+		environnement
+	
+	camera
+		shake
+			mort ennemi / player
+			passage portal
+			impact portal mur
+			atterissage
+		zoom
+			changement taille map
+			passage portal bounce / fondu transition
+		smoothdamp
+	
+	lights
+		illumination tile 
+		tir
+		portal lumière statique
+		flashlight
+		player illumination
+		impact portal
+	
+	portal
+		rescale passage
+	
+	physique
+		recul tir
+		movement smooth 
+		accelération sortie portal
+		projection mort
+
+rumble
+	tir gachette droite / gauche
+	impact mur
+	mort
+	atterissage
+	portal franchissement		
