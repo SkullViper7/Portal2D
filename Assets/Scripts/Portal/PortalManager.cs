@@ -25,8 +25,5 @@ public class PortalManager : MonoBehaviour
         }
     }
 
-    public bool IsPurpVertical;
-    public bool IsCyanVertical;
-    public bool IsPurpUpLocked;
-    public bool IsCyanUpLocked;
+    public List<GameObject> Portals;
 }
