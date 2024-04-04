@@ -1,16 +1,22 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using DG.Tweening;
 
 public class Portal : MonoBehaviour
 {
     public GameObject _otherPortal;
+
+    public GameObject Player;
     Portal _otherPortalScript;
 
     public bool IsUpLocked;
     public bool IsVertical;
 
     public Vector2 ForceDirection;
+
+    private Vector3 originalScale;
+    private Vector3 scaleTo;
 
     // void Start()
     // {
@@ -19,18 +25,23 @@ public class Portal : MonoBehaviour
     //     Invoke("FindOtherPortal", 0.1f);
     // }
 
+    private void Start()
+    {
+        Player.GetComponent<PlayerVFX>().portals.Add(transform);
+        originalScale = transform.localScale;
+    }
+
     public void FindOtherPortal()
     {
         bool canFindPortal = true;
         if (PortalManager.Instance.Portals.Count == 2)
         {
-            for(int i = 0; i < PortalManager.Instance.Portals.Count; i++)
+            for (int i = 0; i < PortalManager.Instance.Portals.Count; i++)
             {
                 GameObject portalToDestroy = PortalManager.Instance.Portals[i];
                 if (gameObject != portalToDestroy && gameObject.tag == portalToDestroy.tag)
                 {
-                    PortalManager.Instance.Portals.Remove(portalToDestroy);
-                    Destroy(portalToDestroy);
+                    portalToDestroy.GetComponent<Portal>().GetDisable();
                     canFindPortal = false;
                 }
             }
@@ -111,14 +122,40 @@ public class Portal : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Rigidbody2D playerRb = other.GetComponent<Rigidbody2D>();
+        if (PortalManager.Instance.Portals.Count == 2)
+            {
+            Rigidbody2D playerRb = other.GetComponent<Rigidbody2D>();
 
-        StartCoroutine(_otherPortalScript.DisableCollider());
+            StartCoroutine(_otherPortalScript.DisableCollider());
 
-        other.transform.position = _otherPortal.transform.position;
-        float velocityTotal = playerRb.velocity.magnitude;
-        playerRb.GetComponent<PlayerMovement>().IsPortalInForce = true;
-        playerRb.velocity = _otherPortalScript.ForceDirection * Math.Abs(velocityTotal);
+            other.transform.position = _otherPortal.transform.position;
+            float velocityTotal = playerRb.velocity.magnitude;
+            if (other.tag == "Ennemy")
+            {
+                other.GetComponent<EnnemyMovement>().IsPortalInForce = true;
+                other.GetComponent<Rigidbody2D>().velocity = _otherPortalScript.ForceDirection * Math.Abs(velocityTotal);
+                
+                scaleTo = originalScale * 2;
+                transform.DOScale(scaleTo, 1)
+                    .SetEase(Ease.Linear)
+                    .SetLoops(-1, LoopType.Yoyo);
+            
+            }
+
+            if (other.tag == "Player")
+            {
+                playerRb.GetComponent<PlayerMovement>().IsPortalInForce = true;
+                playerRb.velocity = _otherPortalScript.ForceDirection * Math.Abs(velocityTotal);
+                scaleTo = originalScale /0.8f;
+                transform.DOScale(scaleTo, 0.5f)
+                    .SetEase(Ease.OutBack)
+                    .SetDelay(0.05f)
+                    .OnComplete(() =>
+                    transform.DOScale(originalScale, 1));
+
+            }
+        }
+        
     }
 
 
@@ -134,6 +171,7 @@ public class Portal : MonoBehaviour
     public void GetDisable()
     {
         PortalManager.Instance.Portals.Remove(gameObject);
+        Player.GetComponent<PlayerVFX>().portals.Remove(transform);
         Destroy(gameObject);
     }
 

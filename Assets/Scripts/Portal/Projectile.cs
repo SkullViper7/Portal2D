@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+
+    public GameObject Player;
+
     [SerializeField] public GameObject _portalPrefab;
 
     void OnTriggerEnter2D(Collider2D other)
@@ -102,6 +105,7 @@ public class Projectile : MonoBehaviour
     {
         PortalManager.Instance.Portals.Add(_newPortal);
         Portal portal = _newPortal.GetComponent<Portal>();
+        portal.Player = Player;
         portal.CheckWalls();
 
             if (PortalManager.Instance.Portals.Count > 1)
