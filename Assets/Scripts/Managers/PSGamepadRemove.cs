@@ -6,8 +6,6 @@ public class PSGamepadRemove : MonoBehaviour
 {
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
-
         CheckAndRemovePS4Gamepads();
         InputSystem.onDeviceChange += OnDeviceChange;
     }

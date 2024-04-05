@@ -40,7 +40,7 @@ public class PlayerShoot : MonoBehaviour
         _newGameObject.GetComponent<Rigidbody2D>().velocity = main.Aim.FindAimDirection() * speedProjectile;
         _newGameObject.GetComponent<Projectile>().Player = gameObject;
         //Call an event when portal is created, our playerVFX will use this to change chromatic aberration;
-        //OnShoot();
+        OnShoot();
     }
 }
 
