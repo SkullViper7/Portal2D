@@ -34,6 +34,7 @@ public class Portal : MonoBehaviour
     {
         Player.GetComponent<PlayerVFX>().portals.Add(transform);
         originalScale = transform.localScale;
+        SendMessage("SpawnPortalVFX");
     }
 
     public void FindOtherPortal()
@@ -175,12 +176,17 @@ public class Portal : MonoBehaviour
     public IEnumerator DisableCollider(Transform _player, float _velocity)
     {
         float velocityTotal = _velocity;
+        
         GetComponent<CapsuleCollider2D>().enabled = false;
         PlayerInputs inputs = _player.GetComponent<PlayerInputs>();
         Rigidbody2D playerRb = _player.GetComponent<Rigidbody2D>();
+
         playerRb.gravityScale = 0;  
         playerRb.velocity = Vector2.zero;
+
         inputs.OnPortal = true;
+
+        float oldDirection = inputs.main.Movement.Direction;
         inputs.main.Movement.Direction = 0;
 
         SendMessage("PlayVFXPortal");
@@ -189,10 +195,18 @@ public class Portal : MonoBehaviour
         
         //tp le joueur
          _player.position = transform.position;
+
+         PlayerMovement playerMovement = _player.GetComponent<PlayerMovement>();
+         playerMovement.IsPortalInForce = true;
+         playerMovement.canJump = false;
          inputs.OnPortal = false;
-         playerRb.GetComponent<PlayerMovement>().IsPortalInForce = true;
+
+         
+
          playerRb.velocity = ForceDirection * Math.Abs(velocityTotal);
          playerRb.gravityScale = 2;  
+
+         inputs.main.Movement.Direction = oldDirection;
 
         yield return new WaitForSeconds(delayDisablePortal);
 

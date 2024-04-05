@@ -50,6 +50,7 @@ public class PlayerVFX : MonoBehaviour
         {
             vignette = vignetteType;
         }
+
     }
 
     private void PlayJumpEffect()
@@ -103,4 +104,6 @@ public class PlayerVFX : MonoBehaviour
             }
         }
     }
+
+    
 }

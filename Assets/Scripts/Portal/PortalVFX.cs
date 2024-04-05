@@ -8,10 +8,14 @@ public class PortalVFX : MonoBehaviour
     [SerializeField]
     private float delayEffectPortal;
 
+    [SerializeField]
+    private float delayAnimationSpawnPortal;
+
     private Volume volume;
 
     private LensDistortion lensDistortion;
     private FilmGrain filmGrain;
+    private Bloom bloom;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +31,12 @@ public class PortalVFX : MonoBehaviour
             filmGrain = fgType;
         }
 
+        
+        if (volume.profile.TryGet<Bloom>(out var bloomType))
+        {
+            bloom = bloomType;
+        }
+
         SendMessage("GiveDelay", delayEffectPortal);
     }
 
@@ -37,5 +47,11 @@ public class PortalVFX : MonoBehaviour
         DOTween.To(() => filmGrain.intensity.value, x => filmGrain.intensity.value = x, 1f, delayEffectPortal)
         .OnComplete(() => filmGrain.intensity.value = 0f);
 
+    }
+
+    public void SpawnPortalVFX()
+    {
+        DOTween.To(() => bloom.intensity.value, x => bloom.intensity.value = x, 50f, delayAnimationSpawnPortal)
+        .OnComplete(() => bloom.intensity.value = 0f);
     }
 }

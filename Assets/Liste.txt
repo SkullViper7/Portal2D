@@ -42,18 +42,19 @@ visuel
 		shake
 			mort ennemi / player
 			passage portal
-			impact portal mur
+			impact portal mur §
 			atterissage §
 			tir §
 		zoom
 			changement taille map
 			passage portal bounce / fondu transition
+			spawn §
 		smoothdamp §
 	
 	lights
 		illumination tile §
 		tir
-		portal lumière statique
+		portal lumière statique §
 		flashlight
 		player illumination
 		impact portal

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -37,10 +36,13 @@ public class RumbleManager : MonoBehaviour
 
     public IEnumerator Rumble(float intensity, float duration)
     {
-        Gamepad.current.SetMotorSpeeds(intensity, intensity);
+        if(Gamepad.current != null)
+        {
+            Gamepad.current.SetMotorSpeeds(intensity, intensity);
 
-        yield return new WaitForSeconds(duration);
+            yield return new WaitForSeconds(duration);
 
-        Gamepad.current.SetMotorSpeeds(0, 0);
+            Gamepad.current.SetMotorSpeeds(0, 0);
+        }
     }
 }

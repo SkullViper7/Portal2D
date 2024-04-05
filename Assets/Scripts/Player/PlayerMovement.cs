@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     private bool inJumpState;
     private float startTime;
     private bool isGrounded;
-    private bool canJump;
+    public bool canJump;
 
     public event Action OnJump;
     public event Action OnLanding;
