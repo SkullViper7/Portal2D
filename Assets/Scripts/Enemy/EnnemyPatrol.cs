@@ -51,5 +51,6 @@ public class EnnemyPatrol : MonoBehaviour
         }
 
         main.Movement.Direction = new Vector3(newDirection, 0, 0);
+        transform.Rotate(0, 180, 0);
     }
 }
