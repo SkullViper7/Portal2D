@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 366933398916452800}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -83,8 +83,8 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 1
+        time: 0.018749237
+        value: 0.22273254
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -92,8 +92,8 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1
-        value: 0
+        time: 0.9874878
+        value: 0.06817627
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -105,7 +105,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 0.58431375}
+      key0: {r: 1, g: 1, b: 1, a: 0.32941177}
       key1: {r: 1, g: 1, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -471,8 +471,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   portals: []
   volume: {fileID: 0}
-  minDistanceChromaticAberration: 0
-  maxDistanceChromaticAberration: 0
+  minDistanceChromaticAberration: 2
+  maxDistanceChromaticAberration: 10
   JumpEffect: {fileID: 2258880982116438805}
   LandingEffect: {fileID: 954825524210759511}
   WalkEffect: {fileID: 2105678447628980692}
@@ -576,8 +576,8 @@ Transform:
   m_GameObject: {fileID: 1776681219916418082}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5999999, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 2.33, z: 0}
+  m_LocalScale: {x: 0.4235, y: 0.4235, z: 0.4235}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6177456654019183811}
@@ -589,7 +589,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1776681219916418082}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -624,7 +624,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0, g: 0.74239993, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.23921569}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -897,6 +897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27778a0a8428c1348b7769123cf8552e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AimDirection: {x: 0, y: 0}
 --- !u!1 &4678428970540823140
 GameObject:
   m_ObjectHideFlags: 0
