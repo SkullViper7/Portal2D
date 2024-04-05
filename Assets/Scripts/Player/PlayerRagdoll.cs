@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerRagdoll : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class PlayerRagdoll : MonoBehaviour
     Collider2D _collider;
     Animator _animator;
     [SerializeField] CinemachineVirtualCamera _cam;
+    [SerializeField] Animator _blackAnim;
+    [SerializeField] AudioSource _audioSource;
+    [SerializeField] AudioClip _deathSFX;
     PlayerMain main;
 
     public void Init(PlayerMain _main)
@@ -29,6 +33,8 @@ public class PlayerRagdoll : MonoBehaviour
 
     void EnableRagdoll()
     {
+        _blackAnim.Play("BlackDeathFadeIn");
+        _audioSource.PlayOneShot(_deathSFX);
         _cam.m_Follow = null;
         _animator.enabled = false;
         _collider.enabled = false;
@@ -40,5 +46,12 @@ public class PlayerRagdoll : MonoBehaviour
         {
             _rigidbodies[i].isKinematic = false;
         }
+
+        Invoke("ReloadScene", 3);
+    }
+
+    void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
