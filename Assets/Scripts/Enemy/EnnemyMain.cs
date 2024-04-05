@@ -4,6 +4,7 @@ public class EnnemyMain : MonoBehaviour
 {
     public EnnemyMovement Movement;
     public EnnemyPatrol Patrol;
+    public EnnemyVFX VFX;
 
     [SerializeField] AudioSource _audioSource;
     [SerializeField] AudioClip _death;

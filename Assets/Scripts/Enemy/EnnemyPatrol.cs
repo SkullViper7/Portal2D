@@ -50,6 +50,7 @@ public class EnnemyPatrol : MonoBehaviour
             newDirection = -1;
         }
 
+        main.VFX.UpdateWalkEffect(newDirection);
         main.Movement.Direction = new Vector3(newDirection, 0, 0);
         transform.Rotate(0, 180, 0);
     }

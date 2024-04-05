@@ -1,6 +1,6 @@
 audio §
 	musique §
-	SFX
+	SFX §
 		bruit portal
 			tir §
 			collision mur §
@@ -25,9 +25,9 @@ visuel
 			mort (variantes)
 			fin de niveau
 			spawn §
-			scale portal
+			scale portal §
 		portal gun
-			tir -> trail + projectile
+			tir -> trail + projectile §
 			impact mur §
 			idle
 			entrée / sortie §
@@ -41,13 +41,13 @@ visuel
 	camera
 		shake
 			mort ennemi / player
-			passage portal
+			passage portal 
 			impact portal mur §
 			atterissage §
 			tir §
 		zoom
 			changement taille map
-			passage portal bounce / fondu transition
+			passage portal bounce / fondu transition §
 			spawn §
 		smoothdamp §
 	
@@ -56,21 +56,28 @@ visuel
 		tir
 		portal lumière statique §
 		flashlight
-		player illumination
-		impact portal
+		player illumination (quand proche d'un portail) §
+		impact portal §
 	
 	portal
-		rescale passage
+		rescale passage 
 	
 	physique
-		recul tir §
+		recul tir 
 		movement smooth § 
-		accelération sortie portal §
-		projection mort
+		accelération sortie portal 
+		projection mort §
 
 rumble
-	tir gachette droite / gauche
-	impact mur
-	mort
-	atterissage
-	portal franchissement		
+	tir gachette droite / gauche §
+	impact mur §
+	mort §
+	atterissage §
+	portal franchissement 
+
+Post Process §
+	Bloom §
+	Chromatic Aberration §
+	Vignette §
+	Lens Distorsion §
+	Grain §
