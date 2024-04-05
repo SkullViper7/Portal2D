@@ -163,3 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   _portalPrefab: {fileID: 533213792989745530, guid: 2308279ba9bb92142af93835ea5d4b2d, type: 3}
+  shakeDuration: 0.7
+  shakeStrength: 0.6
+  shakeVibrato: 50
+  shakeRandomness: 2

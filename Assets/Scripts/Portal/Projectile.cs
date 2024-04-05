@@ -1,4 +1,6 @@
 using UnityEngine;
+using DG.Tweening;
+using Unity.VisualScripting;
 
 public class Projectile : MonoBehaviour
 {
@@ -6,6 +8,18 @@ public class Projectile : MonoBehaviour
     public GameObject Player;
 
     [SerializeField] public GameObject _portalPrefab;
+
+    [SerializeField]
+    private float shakeDuration;
+
+    [SerializeField]
+    private float shakeStrength;
+
+    [SerializeField]
+    private int shakeVibrato;
+
+    [SerializeField]
+    private float shakeRandomness;
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -82,7 +96,7 @@ public class Projectile : MonoBehaviour
                     }
                 }
             }*/
-
+            other.transform.DOShakePosition(shakeDuration, shakeStrength, shakeVibrato, shakeRandomness);
             if (other.gameObject.tag == "VerticalWall" )
             {
                 GameObject newPortal = Instantiate(_portalPrefab, transform.position, Quaternion.Euler(0, 0, 90));
