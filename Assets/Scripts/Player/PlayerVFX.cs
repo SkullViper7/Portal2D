@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.VFX;
+using DG.Tweening;
 
 public class PlayerVFX : MonoBehaviour
 {
@@ -33,10 +34,16 @@ public class PlayerVFX : MonoBehaviour
     [SerializeField]
     private VisualEffect WalkEffect;  
 
+    [SerializeField]
+    private Sprite dustSprite;
+
     private PlayerMain main;
 
     public void Init(PlayerMain _main)
     {
+        JumpEffect.SetTexture("TextureDust", TextureSplit());
+        LandingEffect.SetTexture("TextureDust", TextureSplit());
+        WalkEffect.SetTexture("TextureDust", TextureSplit());
         _main.VFX = this;
         main = _main;
         main.Movement.OnJump += PlayJumpEffect;
@@ -64,13 +71,13 @@ public class PlayerVFX : MonoBehaviour
     }
 
     public void UpdateWalkEffect(float _direction)
-    {
+    {   
         switch(_direction)
         {
             case 0:
                 WalkEffect.Stop();
                 break;
-            case 1:
+            case 1: 
                 WalkEffect.Play();
                 WalkEffect.transform.eulerAngles = new Vector3(0, 90, 0);
                 JumpEffect.transform.eulerAngles = new Vector3(0, 90, 0);
@@ -105,5 +112,27 @@ public class PlayerVFX : MonoBehaviour
         }
     }
 
+    private Texture2D TextureSplit()
+    {
+        var croppedTexture = new Texture2D( (int)dustSprite.rect.width, (int)dustSprite.rect.height );
+
+        var pixels = dustSprite.texture.GetPixels(  (int)dustSprite.textureRect.x, 
+                                                    (int)dustSprite.textureRect.y, 
+                                                    (int)dustSprite.textureRect.width, 
+                                                    (int)dustSprite.textureRect.height );
+
+        croppedTexture.SetPixels( pixels );
+        croppedTexture.Apply();
+        return croppedTexture;
+    }
+
+    public void ScalePlayerEnterPortal(float _delayEffectPortal)
+    {
+        Vector3 originalScale = transform.localScale;
+        Vector3 scaleTo = originalScale / 10f;
+                transform.DOScale(scaleTo, _delayEffectPortal)
+                    .OnComplete(() =>
+                    transform.DOScale(originalScale, _delayEffectPortal));
+    }
     
 }
