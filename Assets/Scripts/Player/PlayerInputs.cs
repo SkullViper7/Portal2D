@@ -54,5 +54,10 @@ public class PlayerInputs : MonoBehaviour
     {
         main.Shoot.FirePurpleProjectile();
     }
+
+    void OnAim(InputValue value)
+    {
+        main.Aim.AimDirection = value.Get<Vector2>();
+    }
 }
 
