@@ -769,6 +769,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25786bebe89bb42408a1ed1a4c131a3c, type: 3}
+--- !u!2083052967 &429124932 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 2105678447628980692, guid: 25786bebe89bb42408a1ed1a4c131a3c, type: 3}
+  m_PrefabInstance: {fileID: 429124931}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &464812616
 GameObject:
   m_ObjectHideFlags: 3
@@ -1675,6 +1680,10 @@ PrefabInstance:
       propertyPath: PatrolPoints.Array.data[1]
       value: 
       objectReference: {fileID: 1306012801}
+    - target: {fileID: 4681779102325203341, guid: a5b8768e04ccf31469928fccdc636cdc, type: 3}
+      propertyPath: WalkEffect
+      value: 
+      objectReference: {fileID: 429124932}
     - target: {fileID: 5139487417485532789, guid: a5b8768e04ccf31469928fccdc636cdc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 49.05

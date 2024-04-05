@@ -4,6 +4,7 @@ public class EnnemyMain : MonoBehaviour
 {
     public EnnemyMovement Movement;
     public EnnemyPatrol Patrol;
+    public EnnemyVFX VFX;
 
     public void Die()
     {
