@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using Unity.VisualScripting;
+using System.Collections;
 
 public class Projectile : MonoBehaviour
 {
@@ -23,6 +24,10 @@ public class Projectile : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.tag == "PurpProjectile" || other.gameObject.tag == "CyanProjectile" || other.gameObject.tag == "PurpPortal" || other.gameObject.tag == "CyanPortal")
+        {
+            Destroy(gameObject);
+        }
         if (other.gameObject.tag == "VerticalWall" || other.gameObject.tag == "HorizontalWall")
         {
            /* if (other.gameObject.tag == "VerticalWall" )
@@ -96,7 +101,7 @@ public class Projectile : MonoBehaviour
                     }
                 }
             }*/
-            other.transform.DOShakePosition(shakeDuration, shakeStrength, shakeVibrato, shakeRandomness);
+            
             if (other.gameObject.tag == "VerticalWall" )
             {
                 GameObject newPortal = Instantiate(_portalPrefab, transform.position, Quaternion.Euler(0, 0, 90));
@@ -111,6 +116,7 @@ public class Projectile : MonoBehaviour
                 InitPortal(newPortal);
             }
 
+            StartCoroutine(WaitToMoveTheWall(other.transform));
             Destroy(gameObject);
         }
     }
@@ -126,5 +132,11 @@ public class Projectile : MonoBehaviour
             {
                 portal.FindOtherPortal();
             }
+    }
+
+    private IEnumerator WaitToMoveTheWall(Transform _wallToMove)
+    {
+        yield return new WaitForSeconds(0.5f);
+        _wallToMove.transform.DOShakePosition(shakeDuration, shakeStrength, shakeVibrato, shakeRandomness);
     }
 }
