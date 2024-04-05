@@ -16,6 +16,9 @@ public class PlayerShoot : MonoBehaviour
 
     public event Action OnShoot;
 
+    [SerializeField] AudioSource _audioSource;
+    [SerializeField] AudioClip _shootSFX;
+
     public void Init(PlayerMain _main)
     {
         _main.Shoot = this;
@@ -40,6 +43,7 @@ public class PlayerShoot : MonoBehaviour
         _newGameObject.GetComponent<Projectile>().Player = gameObject;
         //Call an event when portal is created, our playerVFX will use this to change chromatic aberration;
         OnShoot();
+        _audioSource.PlayOneShot(_shootSFX);
     }
 }
 

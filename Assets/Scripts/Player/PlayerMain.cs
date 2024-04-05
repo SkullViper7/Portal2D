@@ -13,11 +13,15 @@ public class PlayerMain : MonoBehaviour
     public PlayerAnim Anim;
     public PlayerRagdoll Ragdoll;
 
+    [SerializeField] AudioSource _audioSource;
+    [SerializeField] AudioClip _deathSFX;
+
     public event Action OnDie;
 
     public void Die()
     {
         Debug.Log("Die");
+        _audioSource.PlayOneShot(_deathSFX);
         OnDie();
     }
 

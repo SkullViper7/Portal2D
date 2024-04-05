@@ -22,7 +22,7 @@ public class PlayerCamera : MonoBehaviour
     void ShootShake()
     {
         ImpulseManager.Instance.Shake(0, 1, new Vector3(0, -0.25f, 0), 0.25f);
-        StartCoroutine(RumbleManager.Instance.Rumble(1, 0.25f));
+        StartCoroutine(RumbleManager.Instance.Rumble(0.5f, 0.25f));
     }
 
     void Die()
