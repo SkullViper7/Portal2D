@@ -23,6 +23,14 @@ public class PlayerAim : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.up = (Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position)).normalized;
+        if (AimDirection == Vector2.zero)
+        {
+            transform.up = (Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position)).normalized;
+        }
+        else
+        {
+            transform.up = AimDirection;
+        }
+        
     }
 }
