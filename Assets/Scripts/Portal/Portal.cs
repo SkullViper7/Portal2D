@@ -251,6 +251,12 @@ public class Portal : MonoBehaviour
     {
         PortalManager.Instance.Portals.Remove(gameObject);
         Player.GetComponent<PlayerVFX>().portals.Remove(transform);
+        Debug.Log(transform.GetChild(0).name);
+        transform.GetChild(0).GetComponent<Animator>().SetBool("Die", true);
+    }
+
+    public void GetDestroy()
+    {
         Destroy(gameObject);
     }
 
