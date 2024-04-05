@@ -130,12 +130,34 @@ public class Portal : MonoBehaviour
     {
         if (PortalManager.Instance.Portals.Count == 2)
             {
-            Rigidbody2D playerRb = other.GetComponent<Rigidbody2D>();
+                if (other.gameObject.tag == "Ennemy" || other.gameObject.tag == "Player")
+                {
+                    Rigidbody2D entityRb = other.GetComponent<Rigidbody2D>();
 
-            StartCoroutine(_otherPortalScript.DisableCollider(other.transform, playerRb.velocity.magnitude));
+                    if (other.tag == "Ennemy")
+                    {
+                        other.transform.position = _otherPortal.transform.position;
+                        float velocityTotal = entityRb.velocity.magnitude;
+                        other.GetComponent<EnnemyMovement>().IsPortalInForce = true;
+                        entityRb.velocity = _otherPortalScript.ForceDirection * Math.Abs(velocityTotal);
+                        StartCoroutine(_otherPortalScript.DisableCollider());
+                        scaleTo = originalScale * 1.2f;
+                        transform.DOScale(scaleTo, 0.5f)
+                            .SetEase(Ease.InBounce)
+                            .SetDelay(0.05f)
+                            .OnComplete(() =>
+                                transform.DOScale(originalScale, 1));
+                    }
 
-            /*other.transform.position = _otherPortal.transform.position;
-            float velocityTotal = playerRb.velocity.magnitude;
+                    else
+                    {
+                        StartCoroutine(_otherPortalScript.DisableCollider(other.transform, entityRb.velocity.magnitude));
+                    }
+                        
+                }
+            
+
+            /*
             if (other.tag == "Ennemy")
             {
                 other.GetComponent<EnnemyMovement>().IsPortalInForce = true;
@@ -168,7 +190,7 @@ public class Portal : MonoBehaviour
     {
         GetComponent<CapsuleCollider2D>().enabled = false;
 
-        yield return new WaitForSeconds(delayDisablePortal);
+        yield return new WaitForSeconds(delayDisablePortal * 2);
 
         GetComponent<CapsuleCollider2D>().enabled = true;
     }
@@ -183,6 +205,7 @@ public class Portal : MonoBehaviour
 
         playerRb.gravityScale = 0;  
         playerRb.velocity = Vector2.zero;
+        playerRb.gameObject.SendMessage("ScalePlayerEnterPortal", delayEffectPortal);
 
         inputs.OnPortal = true;
 

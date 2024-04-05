@@ -43,15 +43,15 @@ public class PortalVFX : MonoBehaviour
     public void PlayVFXPortal()
     {
         DOTween.To(() => lensDistortion.intensity.value, x => lensDistortion.intensity.value = x, 1f, delayEffectPortal)
-        .OnComplete(() => lensDistortion.intensity.value = 0f);
+        .OnComplete( () => DOTween.To(() => lensDistortion.intensity.value, x => lensDistortion.intensity.value = x, 0f, delayEffectPortal));
         DOTween.To(() => filmGrain.intensity.value, x => filmGrain.intensity.value = x, 1f, delayEffectPortal)
-        .OnComplete(() => filmGrain.intensity.value = 0f);
+        .OnComplete( () => DOTween.To(() => filmGrain.intensity.value, x => filmGrain.intensity.value = x, 0f, delayEffectPortal));
 
     }
 
     public void SpawnPortalVFX()
     {
-        DOTween.To(() => bloom.intensity.value, x => bloom.intensity.value = x, 50f, delayAnimationSpawnPortal)
+        DOTween.To(() => bloom.intensity.value, x => bloom.intensity.value = x, 30f, delayAnimationSpawnPortal)
         .OnComplete(() => bloom.intensity.value = 0f);
     }
 }

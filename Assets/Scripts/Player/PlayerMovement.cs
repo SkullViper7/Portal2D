@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
                     velocity = ChangeVelocity(velocity);
                 }
             }
-            else if(isGrounded && !IsPortalInForce)
+            else if (isGrounded && !IsPortalInForce)
             {
                 if (Direction != 0)
                 {
@@ -163,6 +163,14 @@ public class PlayerMovement : MonoBehaviour
         Debug.DrawRay(transform.position, Vector3.down * (GetComponent<Collider2D>().bounds.size.y / 2 + 0.1f), Color.red);
         //Debug.Log(hit.collider.name);
         //return  hit ;
+        if (i > 0)
+        {
+            if (!IsPortalInForce && !inJumpState)
+            {
+                canJump = true;
+            }
+            
+        }
         return i > 0;//rb.velocity.y == 0;
 
     }
