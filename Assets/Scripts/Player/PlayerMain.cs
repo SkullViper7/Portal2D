@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerMain : MonoBehaviour
@@ -10,10 +11,14 @@ public class PlayerMain : MonoBehaviour
     public PlayerVFX VFX;
     public PlayerCamera Camera;
     public PlayerAnim Anim;
+    public PlayerRagdoll Ragdoll;
+
+    public event Action OnDie;
 
     public void Die()
     {
         Debug.Log("Die");
+        OnDie();
     }
 
     private void Awake()

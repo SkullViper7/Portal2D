@@ -1,4 +1,4 @@
-audio
+audio §
 	musique §
 	SFX
 		bruit portal
@@ -20,7 +20,7 @@ audio
 visuel
 	VFX
 		player
-			trail
+			trail §
 			poussiere pas / atterissage / saut §
 			mort (variantes)
 			fin de niveau
