@@ -40,6 +40,7 @@ public class Portal : MonoBehaviour
         }
         Player.GetComponent<PlayerVFX>().portals.Add(transform);
         originalScale = transform.localScale;
+        ImpulseManager.Instance.Shake(1, 2, new Vector3(0, -0.25f, 0), 0.5f);
         SendMessage("SpawnPortalVFX");
     }
 
