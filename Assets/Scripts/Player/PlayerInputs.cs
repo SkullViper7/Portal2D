@@ -4,13 +4,15 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputs : MonoBehaviour
 {
-    private PlayerMain main;
+    public PlayerMain main;
 
     public event Action OnIdle;
     public event Action OnRun;
     public event Action OnJumpEvent;   
     public event Action OnFlipRight;
     public event Action OnFlipLeft; 
+
+    public bool OnPortal;
 
     public void Init(PlayerMain _main)
     {
@@ -20,7 +22,9 @@ public class PlayerInputs : MonoBehaviour
 
     void OnMove(InputValue _move)
     {
-        main.Movement.Direction = _move.Get<Vector2>().x;
+        if (!OnPortal)
+        {
+            main.Movement.Direction = _move.Get<Vector2>().x;
         main.VFX.UpdateWalkEffect(_move.Get<Vector2>().x);
         OnRun();
 
@@ -37,27 +41,41 @@ public class PlayerInputs : MonoBehaviour
         {
             OnIdle();
         }
+        }
+        
     }
 
     void OnJump()
     {
-        main.Movement.Jump();
-        OnJumpEvent();
+        if (!OnPortal)
+        {
+            main.Movement.Jump();
+            OnJumpEvent();
+        }
     }
 
     void OnPortalCyan()
     {
-        main.Shoot.FireCyanProjectile();
+        if (!OnPortal)
+        {
+            main.Shoot.FireCyanProjectile();
+        }
     }
 
     void OnPortalPurple()
     {
-        main.Shoot.FirePurpleProjectile();
+        if (!OnPortal)
+        {
+            main.Shoot.FirePurpleProjectile();
+        }
     }
 
     void OnAim(InputValue value)
     {
-        main.Aim.AimDirection = value.Get<Vector2>();
+        if (!OnPortal)
+        {
+            main.Aim.AimDirection = value.Get<Vector2>();
+        }
     }
 }
 
