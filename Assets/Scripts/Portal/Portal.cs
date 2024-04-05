@@ -146,9 +146,9 @@ public class Portal : MonoBehaviour
             {
                 playerRb.GetComponent<PlayerMovement>().IsPortalInForce = true;
                 playerRb.velocity = _otherPortalScript.ForceDirection * Math.Abs(velocityTotal);
-                scaleTo = originalScale /0.8f;
+                scaleTo = originalScale * 1.2f;
                 transform.DOScale(scaleTo, 0.5f)
-                    .SetEase(Ease.OutBack)
+                    .SetEase(Ease.InBounce)
                     .SetDelay(0.05f)
                     .OnComplete(() =>
                     transform.DOScale(originalScale, 1));
