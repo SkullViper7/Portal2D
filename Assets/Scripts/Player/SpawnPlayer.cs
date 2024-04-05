@@ -10,11 +10,15 @@ public class SpawnPlayer : MonoBehaviour
 
     [SerializeField] CinemachineVirtualCamera _cam;
 
+    [SerializeField] AudioSource _audioSource;
+    [SerializeField] AudioClip _spawnSFX;
+
     private VisualEffect spawnVfx;
     // Start is called before the first frame update
     void Start()
     {
         spawnVfx = GetComponent<VisualEffect>();
+        _audioSource.PlayOneShot(_spawnSFX);
         StartCoroutine(ZoomOut());
         Invoke("Spawn", 2.1f);
     }

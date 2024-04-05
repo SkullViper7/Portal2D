@@ -23,6 +23,10 @@ public class Portal : MonoBehaviour
     private Vector3 originalScale;
     private Vector3 scaleTo;
 
+    AudioSource _SFXSource;
+    [SerializeField] AudioClip _spawnSFX;
+    [SerializeField] AudioClip _TPSFX;
+
     // void Start()
     // {
     //     CheckWalls();
@@ -42,6 +46,8 @@ public class Portal : MonoBehaviour
         originalScale = transform.localScale;
         ImpulseManager.Instance.Shake(1, 2, new Vector3(0, -0.25f, 0), 0.5f);
         SendMessage("SpawnPortalVFX");
+        _SFXSource = GameObject.Find("SFX").GetComponent<AudioSource>();
+        _SFXSource.PlayOneShot(_spawnSFX);
     }
 
     public void FindOtherPortal()
@@ -144,6 +150,7 @@ public class Portal : MonoBehaviour
                 if (other.gameObject.tag == "Ennemy" || other.gameObject.tag == "Player")
                 {
                     Rigidbody2D entityRb = other.GetComponent<Rigidbody2D>();
+                    _SFXSource.PlayOneShot(_TPSFX);
 
                     if (other.tag == "Ennemy")
                     {

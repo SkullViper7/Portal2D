@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerInputs : MonoBehaviour
 {
@@ -43,6 +44,11 @@ public class PlayerInputs : MonoBehaviour
         }
         }
         
+    }
+
+    void OnRestart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void OnJump()
