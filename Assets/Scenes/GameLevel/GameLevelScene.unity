@@ -2386,10 +2386,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7001997463700577443, guid: b4625ca8e4cfc6e4e909369ca6f66647, type: 3}
-      propertyPath: LightsModule.light
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8748207731084077136, guid: b4625ca8e4cfc6e4e909369ca6f66647, type: 3}
       propertyPath: m_Name
       value: End
