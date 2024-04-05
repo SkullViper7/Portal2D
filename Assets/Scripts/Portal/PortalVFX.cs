@@ -51,7 +51,7 @@ public class PortalVFX : MonoBehaviour
 
     public void SpawnPortalVFX()
     {
-        DOTween.To(() => bloom.intensity.value, x => bloom.intensity.value = x, 30f, delayAnimationSpawnPortal)
+        DOTween.To(() => bloom.intensity.value, x => bloom.intensity.value = x, 50f, delayAnimationSpawnPortal)
         .OnComplete(() => bloom.intensity.value = 0f);
     }
 }

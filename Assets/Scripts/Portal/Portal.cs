@@ -32,6 +32,12 @@ public class Portal : MonoBehaviour
 
     private void Start()
     {
+        if (PortalManager.Instance.Portals.Count > 2)
+        {
+            PortalManager.Instance.Portals.Remove(gameObject);
+            Player.GetComponent<PlayerVFX>().portals.Remove(transform);
+            Destroy(gameObject);
+        }
         Player.GetComponent<PlayerVFX>().portals.Add(transform);
         originalScale = transform.localScale;
         SendMessage("SpawnPortalVFX");
@@ -112,15 +118,19 @@ public class Portal : MonoBehaviour
         {
             case 0:
                 ForceDirection = Vector2.up;
+                //transform.Translate(Vector2.down);
                 break;
             case 1:
                 ForceDirection = Vector2.right;
+                //transform.Translate(Vector2.left);
                 break;
             case 2:
                 ForceDirection = Vector2.down;
+                //transform.Translate(Vector2.up);
                 break;
             case 3:
                 ForceDirection = Vector2.left;
+                //transform.Translate(Vector2.right);
                 break;
         }
         //Destroy(hit.transform.gameObject);

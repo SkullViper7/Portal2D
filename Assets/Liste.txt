@@ -28,9 +28,9 @@ visuel
 			scale portal
 		portal gun
 			tir -> trail + projectile
-			impact mur
+			impact mur §
 			idle
-			entrée / sortie
+			entrée / sortie §
 			fermeture
 		ennemi
 			(trail)

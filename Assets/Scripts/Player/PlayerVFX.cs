@@ -95,12 +95,19 @@ public class PlayerVFX : MonoBehaviour
         if (portals.Count != 0)
         {
             Vector3 closestDirection = portals[0].position - transform.position;
-            foreach(var portal in portals)
+            for(int i = 0; i < portals.Count; i++)
             {
-                Vector3 _direction = portal.position - transform.position; 
-                if (closestDirection.magnitude > _direction.magnitude)
+                if (portals[i] != null)
                 {
-                    closestDirection = _direction;
+                    Vector3 _direction = portals[i].position - transform.position; 
+                    if (closestDirection.magnitude > _direction.magnitude)
+                    {
+                        closestDirection = _direction;
+                    }
+                }
+                else
+                {
+                    portals.Remove(portals[i]);
                 }
             }
             
