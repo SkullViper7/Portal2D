@@ -1178,7 +1178,47 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2869271636651956050, guid: a481b2d81a77ba940a6f56e67638b140, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3283322341505321428, guid: a481b2d81a77ba940a6f56e67638b140, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3283322341505321428, guid: a481b2d81a77ba940a6f56e67638b140, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Name
+      value: Size
+      objectReference: {fileID: 0}
+    - target: {fileID: 3283322341505321428, guid: a481b2d81a77ba940a6f56e67638b140, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[1].m_Name
+      value: SpawnRate
+      objectReference: {fileID: 0}
+    - target: {fileID: 3283322341505321428, guid: a481b2d81a77ba940a6f56e67638b140, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[2].m_Name
+      value: TrailsLifetime
+      objectReference: {fileID: 0}
+    - target: {fileID: 3283322341505321428, guid: a481b2d81a77ba940a6f56e67638b140, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3283322341505321428, guid: a481b2d81a77ba940a6f56e67638b140, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[1].m_Value
+      value: 500000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3283322341505321428, guid: a481b2d81a77ba940a6f56e67638b140, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[2].m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3283322341505321428, guid: a481b2d81a77ba940a6f56e67638b140, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3283322341505321428, guid: a481b2d81a77ba940a6f56e67638b140, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[1].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3283322341505321428, guid: a481b2d81a77ba940a6f56e67638b140, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[2].m_Overridden
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5473231385858987443, guid: a481b2d81a77ba940a6f56e67638b140, type: 3}
       propertyPath: m_Name
@@ -1186,7 +1226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5473231385858987443, guid: a481b2d81a77ba940a6f56e67638b140, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8079282627828016419, guid: a481b2d81a77ba940a6f56e67638b140, type: 3}
       propertyPath: m_LocalPosition.x
